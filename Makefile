@@ -17,7 +17,8 @@ $(TASKS):
 	cd "$@" && TEXINPUTS=..: $(LATEXMK) $(LATEXFLAGS) \
 		-jobname="Blatt$$NUMBER" \
 		-pdflatex="pdflatex %O '\def\SheetNumber{$$NUMBER}\input{%S}'" \
-		main.tex
+		main.tex && \
+		ln -sfn "Blatt$$NUMBER.pdf" main.pdf
 
 # Remove all generated files, including PDFs
 clean:
