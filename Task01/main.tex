@@ -3,5 +3,23 @@
 \begin{document}
 
 \section*{Aufgabe 1}
+First we make these key observations:
+Since \(M\) is maximal, there is no edge \(e\in E\) such that \(M\cup\{e\}\) is still a matching.
+In particular, there can not be an edge in \(M^*\) such that both of its vertices are unmatched by \(M\).
+If there were such an edge, then including it in \(M\) would make it a larger matching, contradicting the maximality of \(M\).
 
+Now we need to consider for any \(e=uv\in M\), how many edges of \(M^*\) can also be attributed to this \(e\in M\). 
+Any such edge of \(M^*\) must have either \(u\) or \(v\) as a vertex.
+Since \(M^*\) is itself a matching, at most one edge of \(M^*\) has \(x\), and at most one edge of \(M^*\) has \(y\) as a vertex.
+Therefore at most two edges of \(M^*\) can be attributed to the same edge of \(M\).
+
+\vspace{1em}
+\center Thus every edge of \(M\) receives at most two edges of \(M^*\), so
+\[
+|M^*| \le 2|M|.
+\]
+Rearranging gives
+\[
+|M| \ge \frac{|M^*|}{2}.
+\]
 \end{document}
