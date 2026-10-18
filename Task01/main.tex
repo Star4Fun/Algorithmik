@@ -1,7 +1,25 @@
 \documentclass{Group_Templ}
 
+\usepackage{amsthm}
+\usepackage{amssymb}
+
 \begin{document}
 
-\section*{Aufgabe 1}
+\section*{Aufgabe 1.3}
+
+\begin{proof}[Cardinality of maximal matchings]
+z.Z. \[\frac{1}{2}\left|M^*\right| \le \left|M\right|\]
+\[\Leftrightarrow \left|M^*\right| \le 2\left|M\right|\]
+Da eine Kante mit genau zwei Endknoten verbunden ist, sind pro Kante, die die Matching Bedingung erfüllen immer zwei Knoten verbunden. Wenn nun eine Kante mit zwei bisher unbenutzen Endknoten übrig bleibt, ist die Maximalität von M nicht erfüllt. Da M maximal ist, muss jede Kante aus M* von mindestens einer aus M berührt werden.
+Der Faktor zwei stammt daher, dass eine Kante aus M höchstens 2 Kanten aus M* berühren kann. Daraus folgt \[\left|M^*\right| \le 2\left|M\right|\]
+\end{proof}
+
+\section*{Aufgabe 1.4}
+\begin{proof}[Dominoes to Matching]
+	Da jeder Dominostein 1x2 groß ist und keine Felder diagonal besetzen kann, kann man das Grid als bipartite graph darstellen, bei dem pro Diagonale getrennt wird, auf welche Seite des Graphen die Knoten sind. Um die Zugehörigkeit festzustellen, können folgende Funktionen verwendet werden:
+	\[L=\{(x,y) \in Grid | x + y = 2n, n \in \mathbb{Z}\}\]
+	\[R=\{(x,y) \in Grid | x + y = 2n+1, n \in \mathbb{Z}\}\] Um nun die Kanten zuzuordnen kann die Manhattan Distanz verwendet werden. Wenn diese = 1 ist, besteht eine Verbindung zwischen den beiden Positionen. Also muss gelten:
+	\[|x_1-x_2|+|y_1-y_2|=1\] Daraus ergibt sich der bipartite Graph, da sich bei einer Manhattan-Distanz von 1 die Parität der Koordinatensumme ändert, verbindet jede Kante einen Knoten aus \(L\) mit einem Knoten aus \(R\). Wenn der Graph kein Perfect Matching besitzt, bleibt bei jeder möglichen Auswahl von Matching-Kanten mindestens ein Knoten unabgedeckt. Somit kann das Grid nicht vollständig mit Dominosteinen belegt werden. Also geht ein mögliches perfect Match mit einer "Füllbarkeit" des Feldes einher. Andersrum folgt auch aus einer vollständigen Abdeckbarkeit mit Dominosteinen ein Perfekt match. Da zwei Endknoten immer genau von einer Kante abgedeckt werden und die Dominosteine sich nicht überlappen. Deshalb wird die matching Eigenschaft nie verletzt und das perfekt Match ist erfüllt, da alle Knoten abgedeckt sind.
+\end{proof}
 
 \end{document}
