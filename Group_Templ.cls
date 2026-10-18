@@ -42,15 +42,15 @@
 \pagestyle{fancy}
 \fancyhf{}
 
-\fancyhead[L]{Übungsblatt \SheetNumber}
-\fancyhead[R]{Gruppe \GroupID\ $\mid$ \GroupMembers}
+\fancyhead[L]{Exercise Sheet \SheetNumber}
+\fancyhead[R]{Group \GroupID\ $\mid$ \GroupMembers}
 \fancyfoot[C]{\thepage}
 
 % PDF metadata
 \AtBeginDocument{%
     \hypersetup{
-        pdfauthor={Gruppe \GroupID},
-        pdftitle={\CourseName: Übungsblatt \SheetNumber},
+        pdfauthor={Group \GroupID},
+        pdftitle={\CourseName: Exercise Sheet \SheetNumber},
         pdfproducer={LaTeX}
     }
 }
