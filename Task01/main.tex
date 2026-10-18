@@ -1,25 +1,41 @@
+
 \documentclass{Group_Templ}
 
+\usepackage{amsthm}
+\usepackage{amssymb}
+
 \begin{document}
+	
+	\section*{Task 1.3}
+	
+	\begin{proof}[Cardinality of maximal matchings]
+		First we make these key observations:
+    Since \(M\) is maximal, there is no edge \(e\in E\) such that \(M\cup\{e\}\) is still a matching.
+    In particular, there can not be an edge in \(M^*\) such that both of its vertices are unmatched by \(M\).
+    If there were such an edge, then including it in \(M\) would make it a larger matching, contradicting the maximality of \(M\).
 
-\section*{Aufgabe 1}
-First we make these key observations:
-Since \(M\) is maximal, there is no edge \(e\in E\) such that \(M\cup\{e\}\) is still a matching.
-In particular, there can not be an edge in \(M^*\) such that both of its vertices are unmatched by \(M\).
-If there were such an edge, then including it in \(M\) would make it a larger matching, contradicting the maximality of \(M\).
+    Now we need to consider for any \(e=uv\in M\), how many edges of \(M^*\) can also be attributed to this \(e\in M\). 
+    Any such edge of \(M^*\) must have either \(u\) or \(v\) as a vertex.
+    Since \(M^*\) is itself a matching, at most one edge of \(M^*\) has \(x\), and at most one edge of \(M^*\) has \(y\) as a vertex.
+    Therefore at most two edges of \(M^*\) can be attributed to the same edge of \(M\).
 
-Now we need to consider for any \(e=uv\in M\), how many edges of \(M^*\) can also be attributed to this \(e\in M\). 
-Any such edge of \(M^*\) must have either \(u\) or \(v\) as a vertex.
-Since \(M^*\) is itself a matching, at most one edge of \(M^*\) has \(x\), and at most one edge of \(M^*\) has \(y\) as a vertex.
-Therefore at most two edges of \(M^*\) can be attributed to the same edge of \(M\).
-
-\vspace{1em}
-\center Thus every edge of \(M\) receives at most two edges of \(M^*\), so
-\[
-|M^*| \le 2|M|.
-\]
-Rearranging gives
-\[
-|M| \ge \frac{|M^*|}{2}.
-\]
+    \vspace{1em}
+    \center Thus every edge of \(M\) receives at most two edges of \(M^*\), so
+    \[
+    |M^*| \le 2|M|.
+    \]
+    Rearranging gives
+    \[
+    |M| \ge \frac{|M^*|}{2}.
+    \]
+	\end{proof}
+	
+	\section*{Task 1.4}
+	\begin{proof}[Dominoes to Matching]
+		Since every domino has a size of 1x2 and cannot cover diagonally adjacent cells, the grid can be represented as a bipartite graph, where the diagonals determine which side of the graph the vertices belong to. To determine their assignment, the following functions can be used:
+		\[L=\{(x,y) \in Grid | x + y = 2n, n \in \mathbb{Z}\}\]
+		\[R=\{(x,y) \in Grid | x + y = 2n+1, n \in \mathbb{Z}\}\] To determine the edges, the Manhattan distance can be used. If this distance equals 1, there is a connection between the two positions. Therefore, the following must hold:
+		\[|x_1-x_2|+|y_1-y_2|=1\] This results in the bipartite graph, since a Manhattan distance of 1 changes the parity of the coordinate sum, every edge connects a vertex from \(L\) to a vertex from \(R\). If the graph does not have a perfect matching, at least one vertex remains uncovered for every possible selection of matching edges. Thus, the grid cannot be completely covered with dominoes. Therefore, the existence of a perfect matching goes hand in hand with the "tileability" of the grid. Conversely, a complete covering with dominoes also implies a perfect matching. Since two endpoints are always covered by exactly one edge and the dominoes do not overlap. Therefore, the matching property is never violated and the perfect matching condition is satisfied, since all vertices are covered.
+	\end{proof}
+  
 \end{document}
