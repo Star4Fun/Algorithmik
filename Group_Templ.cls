@@ -14,6 +14,8 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{hyperref}
 \RequirePackage{currfile}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
 
 % Load configuration
 \InputIfFileExists{config.tex}{}{%

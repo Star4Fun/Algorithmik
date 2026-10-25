@@ -1,0 +1,335 @@
+\documentclass{Group_Templ}
+
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\begin{document}
+
+\section*{Task 2.4}
+
+
+\begin{proof}[Augmenting and Directed Paths]
+	We want to prove the following statement:
+	
+	Let $G = (V, E)$ be a bipartite graph with
+	$V = A \dot\cup B$, let $D$ be the directed graph
+	constructed from $G$, and let $M$ be a matching in $G$.
+	
+	An augmenting path exists in $G$ with respect to $M$
+	if and only if there is a directed path in $D$
+	between an exposed vertex in $A$ and an exposed
+	vertex in $B$.
+	
+	\medskip
+	\noindent\textbf{Construction of the Directed Graph $D$}
+	
+	The edges of $G$ are directed according to their
+	membership in $M$:
+	
+	\begin{itemize}
+		\item Every edge $e \notin M$ is directed
+		from $A$ to $B$.
+		\item Every edge $e \in M$ is directed
+		from $B$ to $A$.
+	\end{itemize}
+	
+	This orientation ensures that a directed path from
+	an exposed vertex in $A$ to an exposed vertex in $B$
+	alternates between matching and non-matching edges.
+	
+	\medskip
+	\noindent\textbf{Direction 1:
+		Augmenting Path $\Rightarrow$ Directed Path}
+	
+	Assume that an augmenting path $P$ exists in $G$
+	with respect to $M$.
+	
+	By definition, an augmenting path starts and ends
+	at exposed vertices. Furthermore, its edges alternate
+	between edges belonging to $M$ and edges not
+	belonging to $M$.
+	
+	Since $G$ is bipartite and an augmenting path starts
+	and ends with an edge not belonging to $M$, one
+	endpoint belongs to $A$ and the other belongs to $B$.
+	
+	We traverse the path from $A$ to $B$. According to
+	the construction of $D$, all non-matching edges are
+	directed from $A$ to $B$, while all matching edges
+	are directed from $B$ to $A$.
+	
+	Therefore, every edge of $P$ follows the
+	corresponding direction in $D$.
+	
+	Thus, $P$ is also a directed path in $D$ between
+	an exposed vertex in $A$ and an exposed vertex
+	in $B$.
+	
+	\medskip
+	\noindent\textbf{Direction 2:
+		Directed Path $\Rightarrow$ Augmenting Path}
+	
+	Assume that there exists a directed path $P$ in $D$
+	from an exposed vertex in $A$ to an exposed
+	vertex in $B$.
+	
+	According to the construction of $D$:
+	
+	\begin{itemize}
+		\item Edges directed from $A$ to $B$ do not
+		belong to $M$.
+		\item Edges directed from $B$ to $A$ belong
+		to $M$.
+	\end{itemize}
+	
+	Since $G$ is bipartite, the path alternates between
+	vertices in $A$ and $B$. Therefore, its edges
+	alternate between matching and non-matching edges.
+	
+	Furthermore, both endpoints of $P$ are
+	exposed vertices.
+	
+	Consequently, $P$ satisfies all conditions of
+	an augmenting path in $G$.
+	
+	\medskip
+	\noindent\textbf{Conclusion}
+	
+	Thus, both directions have been proven:
+	
+	\[
+	\boxed{
+		\begin{gathered}
+			\text{Augmenting path in } G\\
+			\iff\\
+			\text{Directed path in } D\\
+			\text{between exposed vertices in }
+			A \text{ and } B
+		\end{gathered}
+	}
+	\]
+\end{proof}
+\newpage
+
+
+\section*{Task 2.5}
+
+\noindent\textbf{Initial Matching}
+
+The vertex partitions are:
+\[
+\begin{aligned}
+	A &= \{1,2,3,4,5,6,7\},\\
+	B &= \{8,9,10,11,12,13,14\}.
+\end{aligned}
+\]
+
+The initial matching consists of the red edges:
+\[
+M_0 = \{(2,8),(5,10),(7,13)\}.
+\]
+
+Therefore:
+\[
+|M_0| = 3.
+\]
+
+The exposed vertices are:
+\[
+\begin{aligned}
+	A_{\mathrm{free}} &= \{1,3,4,6\},\\
+	B_{\mathrm{free}} &= \{9,11,12,14\}.
+\end{aligned}
+\]
+
+We direct non-matching edges from $A$ to $B$
+and matching edges from $B$ to $A$.
+
+\medskip
+\noindent\textbf{Step 0 -- Directed Graph $D_0$}
+
+The directed edges are:
+\[
+\begin{aligned}
+	D_0 = \{&
+	1\rightarrow 8,\ 1\rightarrow 10,\
+	8\rightarrow 2,\ 2\rightarrow 9,\\
+	&3\rightarrow 9,\ 3\rightarrow 12,\
+	4\rightarrow 9,\ 4\rightarrow 11,\\
+	&10\rightarrow 5,\ 5\rightarrow 14,\
+	6\rightarrow 11,\\
+	&7\rightarrow 12,\ 13\rightarrow 7
+	\}.
+\end{aligned}
+\]
+
+We identify the following augmenting path:
+\[
+\boxed{
+	P_1: 1\rightarrow 10\rightarrow 5\rightarrow 14
+}
+\]
+
+We remove the matching edge $(5,10)$ and add
+the edges $(1,10)$ and $(5,14)$.
+
+The updated matching is:
+\[
+\begin{aligned}
+	M_1 &= \{(2,8),(1,10),(5,14),(7,13)\},\\
+	|M_1| &= 4.
+\end{aligned}
+\]
+
+\medskip
+\noindent\textbf{Step 1 -- Directed Graph $D_1$}
+
+After updating the matching, the directions
+of the affected edges change:
+\[
+\begin{aligned}
+	D_1 = \{&
+	1\rightarrow 8,\ 10\rightarrow 1,\
+	8\rightarrow 2,\ 2\rightarrow 9,\\
+	&3\rightarrow 9,\ 3\rightarrow 12,\
+	4\rightarrow 9,\ 4\rightarrow 11,\\
+	&5\rightarrow 10,\ 14\rightarrow 5,\
+	6\rightarrow 11,\\
+	&7\rightarrow 12,\ 13\rightarrow 7
+	\}.
+\end{aligned}
+\]
+
+The exposed vertices are now:
+\[
+\begin{aligned}
+	A_{\mathrm{free}} &= \{3,4,6\},\\
+	B_{\mathrm{free}} &= \{9,11,12\}.
+\end{aligned}
+\]
+
+We choose the augmenting path:
+\[
+\boxed{
+	P_2: 3\rightarrow 12
+}
+\]
+
+Since both endpoints are exposed, this edge
+can be added directly to the matching:
+\[
+\begin{aligned}
+	M_2 &= M_1\cup\{(3,12)\},\\
+	|M_2| &= 5.
+\end{aligned}
+\]
+
+\medskip
+\noindent\textbf{Step 2 -- Directed Graph $D_2$}
+
+Compared to $D_1$, only the direction of
+the edge $(3,12)$ changes:
+\[
+D_2 =
+(D_1\setminus\{3\rightarrow 12\})
+\cup\{12\rightarrow 3\}.
+\]
+
+The exposed vertices are:
+\[
+\begin{aligned}
+	A_{\mathrm{free}} &= \{4,6\},\\
+	B_{\mathrm{free}} &= \{9,11\}.
+\end{aligned}
+\]
+
+We select another augmenting path:
+\[
+\boxed{
+	P_3: 4\rightarrow 9
+}
+\]
+
+The updated matching becomes:
+\[
+\begin{aligned}
+	M_3 &= M_2\cup\{(4,9)\},\\
+	|M_3| &= 6.
+\end{aligned}
+\]
+
+\medskip
+\noindent\textbf{Step 3 -- Directed Graph $D_3$}
+
+The direction of the edge $(4,9)$ changes:
+\[
+D_3 =
+(D_2\setminus\{4\rightarrow 9\})
+\cup\{9\rightarrow 4\}.
+\]
+
+The remaining exposed vertices are:
+\[
+\begin{aligned}
+	A_{\mathrm{free}} &= \{6\},\\
+	B_{\mathrm{free}} &= \{11\}.
+\end{aligned}
+\]
+
+We choose the final augmenting path:
+\[
+\boxed{
+	P_4: 6\rightarrow 11
+}
+\]
+
+We add this edge to the matching:
+\[
+\begin{aligned}
+	M_4 &= M_3\cup\{(6,11)\},\\
+	|M_4| &= 7.
+\end{aligned}
+\]
+
+\medskip
+\noindent\textbf{Step 4 -- Final Directed Graph $D_4$}
+
+The last matching edge is reversed:
+\[
+D_4 =
+(D_3\setminus\{6\rightarrow 11\})
+\cup\{11\rightarrow 6\}.
+\]
+
+There are no exposed vertices remaining.
+
+The final matching is:
+\[
+\boxed{
+	\begin{aligned}
+		M_4 = \{&
+		(1,10),(2,8),(3,12),\\
+		&(4,9),(5,14),(6,11),(7,13)
+		\}.
+	\end{aligned}
+}
+\]
+
+\medskip
+\noindent\textbf{Conclusion}
+
+Since the graph contains 14 vertices, any matching
+can contain at most seven edges.
+
+We have found a matching containing exactly
+seven edges:
+\[
+\boxed{
+	|M_4| = 7 = \frac{|V|}{2}
+}
+\]
+
+Therefore, $M_4$ is a perfect matching and
+consequently also a maximum matching.
+
+\end{document}
