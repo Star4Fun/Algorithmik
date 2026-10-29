@@ -1,0 +1,162 @@
+\documentclass{Group_Templ}
+
+\begin{document}
+
+\section*{Exercise 3.3}
+\begin{proof}[s-t-shortest-path]
+	Let $\delta(s,v)$ denote the shortest-path distance from $s$ to $v$.\newline
+	\noindent\textbf{1. Upper Bound}\newline
+	Consider any path $P = (s = v_0,\dots,v_k = t)$\newline
+	For every edge along this path, the LP constraints imply:
+	\begin{flalign*}
+		d_{v1}&\le d_s+w(v_0,v_1) \\
+		d_{v2}&\le d_{v_1}+w(v_1,v_2) \\
+		&\vdots \\
+		d_t&\le d_{v_{k-1}}+w(v_{k-1}, v_k)
+	\end{flalign*}
+	By summing these inequalities, the intermediate terms cancel. Since $d_s=0$, we obtain: \[d_t \le \sum_{i=1}^{k}w(v_{i-1},v_i)\]
+	Since this holds for every path, including the shortest one:
+	\[
+	\boxed{
+		d_t \le \delta(s,t)
+	}\]
+	\noindent\textbf{2. Feasibility}\newline
+	We assign $d_v=\delta(s,v)$ for every vertex reachable from s.\newline
+	For every edge $(u,v)$ between vertices reachable from $s$, the shortest-path property guarantees:
+	\[
+		\delta(s,v)\le \delta(s,u)+w(u,v)
+	\]
+	This holds because extending a shortest path to u by the edge $(u,v)$ cannot produce a shorter path than the shortest path to $v$.\newline
+	
+	\noindent For vertices unreachable from $s$, we choose a constant
+	\[
+	C = \max_{v \text{ reachable from } s} \delta(s,v)
+	\]
+	and assign $d_v=C$ to every unreachable vertex.
+	
+	\noindent There cannot be an edge from a reachable vertex to an
+	unreachable vertex, since such an edge would make that
+	vertex reachable.
+	
+	\noindent For edges between unreachable vertices, the constraints
+	are satisfied because $C \leq C+w(u,v)$.
+	
+	\noindent For edges from unreachable to reachable vertices, the
+	constraints are also satisfied since
+	$\delta(s,v)\leq C \leq C+w(u,v)$.
+	
+	\noindent Therefore, all LP constraints are satisfied, and a feasible
+	solution exists with
+	\[
+	d_t=\delta(s,t).
+	\]
+	\noindent\textbf{3. Conclusion}\newline
+	Since $d_t$ cannot exceed $\delta(s,t)$, but this value can be achieved:
+	\[
+	\boxed{
+		\max d_t = \delta(s,t)
+	}\]
+	Therefore, the LP correctly models the shortest-path
+	problem, provided that $t$ is reachable from $s$.
+\end{proof}
+\newpage
+\section*{Exercise 3.4}
+Given:
+
+\begin{flalign*}
+	\min \quad x_1 - 2x_2 + x_3 + 4x_4,\\
+	\text{s.t.}\quad
+	x_1-x_2+2x_3+x_4 & = 20,\\
+	x_1+2x_2+3x_3-x_4 &\geq -10,\\
+	2x_1+4x_2-7x_3+x_4 &\leq 0,\\
+	x_1 &\geq 4,\\
+	x_2 &\geq 0,\\
+	x_3 &\leq 0.
+\end{flalign*}
+The constraints $x_1-x_2+2x_3+x_4 = 20$, $2x_1+4x_2-7x_3+x_4 \leq 0$, $x_4 \in \mathbb{R}$, $x_1 \ge 4$ and $x_3 \leq 0$ have to be normalized.
+
+\noindent\textbf{1. $x_1-x_2+2x_3+x_4 = 20$}:
+\begin{flalign*}
+	x_1-x_2+2x_3+x_4 &= 20 \Rightarrow x_1-x_2+2x_3+x_4 \ge 20 \text{ and } x_1-x_2+2x_3+x_4 \le 20 \\
+	x_1-x_2+2x_3+x_4 &\le 20 \\
+	\Leftrightarrow -x_1+x_2-2x_3-x_4 &\ge -20 \\
+	\text{so } x_1-x_2+2x_3+x_4 &\ge 20 \text{ and } -x_1+x_2-2x_3-x_4 \ge -20
+\end{flalign*}
+\noindent\textbf{2. $2x_1+4x_2-7x_3+x_4 \leq 0$}:
+
+\begin{flalign*}
+	2x_1+4x_2-7x_3+x_4 &\leq 0 \\
+	\Leftrightarrow -2x_1-4x_2+7x_3-x_4 &\geq 0
+\end{flalign*}
+\noindent\textbf{3. $x_4 \in \mathbb{R}$}:
+
+\begin{flalign*}
+x_4 &= x_4^+ - x_4^-,
+\quad x_4^+, x_4^- \geq 0
+\end{flalign*}
+\noindent\textbf{4. $x_1 \ge 4$}:
+Substitute:
+\begin{flalign*}
+x_1 &= 4 + y_1,\quad y_1 \ge 0
+\end{flalign*}
+\noindent\textbf{5. $x_3 \leq 0$}:
+Substitute:
+\begin{flalign*}
+x_3 &= -y_3, \quad y_3 \ge 0
+\end{flalign*}
+
+\begin{flalign*}
+	\min \quad (4+y_1) - 2x_2 - y_3 + 4(x_4^+ - x_4^-),\\
+	\text{s.t.}\quad
+	(4+y_1)-x_2-2y_3+(x_4^+ - x_4^-) &\ge 20,\\
+	-(4+y_1)+x_2+2y_3-(x_4^+ - x_4^-) &\ge -20,\\
+	(4+y_1)+2x_2-3y_3-(x_4^+ - x_4^-) &\geq -10,\\
+	-(8+2y_1)-4x_2-7y_3-(x_4^+ - x_4^-) &\geq 0,\\
+	y_1 &\geq 0,\\
+	x_2 &\geq 0,\\
+	y_3 &\ge 0, \\
+	x_4^+ &\ge 0, \\
+	x_4^- &\ge 0.
+\end{flalign*}
+\newpage
+\noindent Expanding and rearranging the expressions yields:
+\begin{flalign*}
+	\min \quad y_1 - 2x_2 - y_3 + 4x_4^+ - 4x_4^-,\\
+	\text{s.t.}\quad
+	y_1-x_2-2y_3+x_4^+ - x_4^- &\ge 16,\\
+	-y_1+x_2+2y_3-x_4^+ + x_4^- &\ge -16,\\
+	y_1+2x_2-3y_3-x_4^+ + x_4^- &\geq -14,\\
+	-2y_1-4x_2-7y_3-x_4^+ + x_4^- &\geq 8,\\
+	y_1 &\geq 0,\\
+	x_2 &\geq 0,\\
+	y_3 &\ge 0, \\
+	x_4^+ &\ge 0, \\
+	x_4^- &\ge 0.
+\end{flalign*}
+
+
+\noindent\textbf{Reconstruction of the original solution:}
+
+$z_{original}=z_{standard}+4$
+
+\noindent Given a solution of the LP in standard form, the
+original variables can be reconstructed as follows:
+\begin{align*}
+	x_1 &= 4+y_1,\\
+	x_3 &= -y_3,\\
+	x_4 &= x_4^+-x_4^-.
+\end{align*}
+The variable $x_2$ remains unchanged.
+
+\section*{Exercise 3.5}
+
+\begin{flalign*}
+	x_1 = \text{Number of Strawberry Dream cups},\quad &x_2 = \text{Number of Chocolate Melt cups} \\
+	\max \quad 5x_1+3x_2,\\
+	\text{s.t.}\quad 2x_1+x_2&\le 50 \\
+	x_1+3x_2&\le 30 \\
+	x_1 \ge 0 \\
+	x_2 \ge 0
+\end{flalign*}
+
+\end{document}
