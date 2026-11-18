@@ -1,0 +1,112 @@
+\documentclass{Group_Templ}
+
+\begin{document}
+	
+	\section*{Exercise 6.3 -- Duality and Simplex Initialization}
+	\begin{enumerate}
+		\item The dual of the given primal LP is
+		\begin{align*}
+			\min\quad &y_1+y_2\\
+			\text{s.t.}\quad &y_1\ge 1,\\
+			&y_2\ge 1,\\
+			&-y_1-y_2\ge -1,\\
+			&y_1,y_2\ge 0.
+		\end{align*}
+		
+		\item No written answer required.
+		
+		\item Initial slack form:
+		\begin{align*}
+			z&=x_1+x_2-x_3,\\
+			x_4&=1-x_1+x_3,\\
+			x_5&=1-x_2+x_3.
+		\end{align*}
+		Initial basic feasible solution: $(x_1,x_2,x_3)=(0,0,0)$, $x_4=x_5=1$.
+		
+		Entering: $x_1$; leaving: $x_4$ ($1/1=1$).
+		\begin{align*}
+			z&=1+x_2-x_4,\\
+			x_1&=1+x_3-x_4,\\
+			x_5&=1-x_2+x_3.
+		\end{align*}
+		Entering: $x_2$; leaving: $x_5$ ($1/1=1$).
+		\begin{align*}
+			z&=2+x_3-x_4-x_5,\\
+			x_1&=1+x_3-x_4,\\
+			x_2&=1+x_3-x_5.
+		\end{align*}
+		$x_3$ has a positive objective coefficient, but no leaving variable exists.
+		Therefore, the primal LP is \emph{unbounded}.
+		
+		\item Rewrite the dual as a maximization problem:
+		\begin{align*}
+			\max\quad &-y_1-y_2\\
+			\text{s.t.}\quad &-y_1\le -1,\\
+			&-y_2\le -1,\\
+			&y_1+y_2\le 1,\\
+			&y_1,y_2\ge 0.
+		\end{align*}
+		Initial slack form:
+		\begin{align*}
+			z&=-y_1-y_2,\\
+			y_3&=-1+y_1,\\
+			y_4&=-1+y_2,\\
+			y_5&=1-y_1-y_2.
+		\end{align*}
+		Since $y_3=y_4=-1$ at $y_1=y_2=0$, initialize with the auxiliary LP
+		\begin{align*}
+			z_{\mathrm{aux}}&=-y_0,\\
+			y_3&=-1+y_1+y_0,\\
+			y_4&=-1+y_2+y_0,\\
+			y_5&=1-y_1-y_2+y_0,
+		\end{align*}
+		with all variables nonnegative.
+		
+		Entering: $y_0$; leaving: $y_3$ (smallest constant $-1$, tie with $y_4$).
+		\begin{align*}
+			z_{\mathrm{aux}}&=-1+y_1-y_3,\\
+			y_0&=1-y_1+y_3,\\
+			y_4&=-y_1+y_2+y_3,\\
+			y_5&=2-2y_1-y_2+y_3.
+		\end{align*}
+		Entering: $y_1$; leaving: $y_4$:
+		\[
+		\min\left\{\frac11,\frac01,\frac22\right\}=0.
+		\]
+		\begin{align*}
+			z_{\mathrm{aux}}&=-1+y_2-y_4,\\
+			y_0&=1-y_2+y_4,\\
+			y_1&=y_2+y_3-y_4,\\
+			y_5&=2-3y_2-y_3+y_4.
+		\end{align*}
+		Entering: $y_2$; leaving: $y_5$:
+		\[
+		\min\left\{\frac11,\frac23\right\}=\frac23.
+		\]
+		\begin{align*}
+			z_{\mathrm{aux}}&=-\frac13-\frac13y_3-\frac23y_4-\frac13y_5,\\
+			y_0&=\frac13+\frac13y_3+\frac23y_4+\frac13y_5,\\
+			y_1&=\frac23+\frac23y_3-\frac23y_4-\frac13y_5,\\
+			y_2&=\frac23-\frac13y_3+\frac13y_4-\frac13y_5.
+		\end{align*}
+		All nonbasic objective coefficients are nonpositive. Thus
+		\[
+		\boxed{z_{\mathrm{aux}}^*=-\frac13<0},
+		\]
+		so the dual LP is \emph{infeasible}.
+	\end{enumerate}
+	
+	\section*{Exercise 6.4 -- Comprehension Questions}
+	\begin{enumerate}
+		\item \textbf{True.} By weak duality, any feasible dual solution gives an upper bound on the primal objective value. An unbounded primal LP therefore implies an infeasible dual LP.
+		
+		\item \textbf{False.} An infeasible primal LP does not imply an optimal dual solution. For example, the primal LP $\max\{x : x\le -1,\ x\ge 0\}$ is infeasible, while its dual $\min\{-y : y\ge 1,\ y\ge 0\}$ is unbounded below.
+		
+		\item \textbf{True.} If $x'\ne x''$ are optimal solutions, then for every $\lambda\in[0,1]$ the point
+		\[
+		x_\lambda=\lambda x'+(1-\lambda)x''
+		\]
+		is feasible by convexity and has the same optimal objective value by linearity. Thus there are infinitely many optimal solutions.
+	\end{enumerate}
+	
+\end{document}
